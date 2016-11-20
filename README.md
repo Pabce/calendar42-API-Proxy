@@ -1,5 +1,5 @@
 # calendar42-API-Proxy
-A simple API Proxy package written in Python that combines and caches multiple calls to the Calendar42 Demo API into one single call with a lightweight response in json format.
+A simple API Proxy package written in Python. It combines and caches multiple calls to the Calendar42 Demo API into one single call with a lightweight response (which will be in json format).
 
 ## Getting started: Setting up the Proxy server
 In the command line, we can simply type the following to initialize the Proxy:
