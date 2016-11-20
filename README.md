@@ -26,7 +26,7 @@ proxy.start_proxy()
 Again, we can pass the optional parameters _port_number_ and _token_ if we want to.
 
 ## Making a GET request to the Proxy server
-Making GET requests to the Proxy server is straightforward. It supports the /events-with-subscriptions/$EVENT_ID path format 
+Making GET requests to the Proxy server is straightforward. It supports the /events-with-subscriptions/$EVENT_ID/ path format 
 (Make sure to request to the same port the Proxy server has been intialized at!).
 
 Using [curl](https://curl.haxx.se/) in the command line:
