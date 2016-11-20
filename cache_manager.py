@@ -1,5 +1,18 @@
 #!/usr/bin/env python
 
+"""
+File: cache_manager.py
+
+The CacheManager class manages the cache for the Proxy server.
+
+An instance of the CacheManager class stores the cached values for each distinct EVENT_ID that the user has requested,
+and also the time at when they were cached.
+
+When the user requests information for the same EVENT_ID, the CacheManager can determine whether enough time has passed
+(and a new request to the C42 API will be sent) or not (and the cached value will be returned).
+
+Also, values will only be cached if the request to the C42 API that generated them returned no error.
+"""
 
 import time
 

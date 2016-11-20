@@ -1,7 +1,20 @@
 #!/usr/bin/env python
 
+"""
+File: request_to_C42.py
 
-import json
+A module for communicating with the C42 API.
+
+The GetRequest class can be used to send GET requests to the API.
+Other classes can be added in the future for increased functionality (PUT, HEAD, etc)
+
+The get_events_with_subscriptions method does exactly what we want:
+send a couple of GET requests and filter and combine the results from them.
+
+Every GET request to the API should be handled by a new instance of the GetRequest class,
+which takes a EVENT_ID and a authentication TOKEN as arguments.
+"""
+
 import requests
 
 __author__ = 'Pablo Barham'
@@ -26,29 +39,39 @@ class GetRequest:
         title, status_code = self.get_title()
         first_names = self.get_first_names()
 
-        json_to_return = {
-            'id': self.EVENT_ID,
-            'title': title,
-            'first_names': first_names
-        }
+        if status_code == 200:
+            json_to_return = {
+                'id': self.EVENT_ID,
+                'title': title,
+                'first_names': first_names
+            }
 
-        if status_code == 401:
-            json_to_return['error'] = '401: Unauthorized error (C42 API)'
-            json_to_return['error_message'] = 'A 401: Unauthorized error ' \
-                                              'occurred when attempting to contact the C42 API. ' \
-                                              'Authentication credentials were not valid'
+        elif status_code == 401:
+            json_to_return = {
+                'error': {
+                    'status_code': 401,
+                    'message': 'A 401: Unauthorized error occurred when attempting to contact the C42 API. '
+                               'Authentication credentials were not valid'
+                }
+            }
         elif status_code == 404:
-            json_to_return['error'] = '404: Not Found error (C42 API) '
-            json_to_return['error_message'] = 'A 404: Not Found error ' \
-                                              'occurred when attempting to contact the C42 API. ' \
-                                              'The EVENT_ID you requested does not exist'
-        elif status_code != 200:
-            json_to_return['error'] = status_code
-            json_to_return['error_message'] = 'Something strange occurred when attempting to contact the C42 API.' \
-                                              'This was completely unexpected!'
+            json_to_return = {
+                'error': {
+                    'status_code': 404,
+                    'message': 'A 404: Not Found error occurred when attempting to contact the C42 API. '
+                               'The EVENT_ID you requested does not exist'
+                }
+            }
+        else:
+            json_to_return = {
+                'error': {
+                    'status_code': status_code,
+                    'message': 'Something strange occurred when attempting to contact the C42 API. '
+                               'This was completely unexpected!'
+                }
+            }
 
-        to_return = json.dumps(json_to_return)
-        return to_return
+        return json_to_return
 
     # Get event details (title)
     def get_title(self):
