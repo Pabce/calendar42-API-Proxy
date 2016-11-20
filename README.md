@@ -23,7 +23,7 @@ proxy.start_proxy()
 # If we want to set the parameters:
 # proxy.start_proxy(port_number=SOME_PORT_NUMBER, token=SOME_AUTHENTICATION_TOKEN)
 ```
-Again, we can pass the optional arguments _port_number_ and _token_ if we want to.
+Again, we can pass the optional parameters _port_number_ and _token_ if we want to.
 
 ## Making a GET request to the Proxy server
 Making GET requests to the Proxy server is straightforward. It supports the /events-with-subscriptions/$EVENT_ID path format 
