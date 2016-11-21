@@ -63,7 +63,7 @@ Therefore, mi initial choices for making requests to the C42 API and setting up 
 
 Further into coding, however, I decided to switch to the [requests](http://docs.python-requests.org/en/master/) library, which I found to be a powerful and very efficient tool for sending HTTP requests.
 
-Finally, I used the [pyTest](http://doc.pytest.org/en/latest/example/) library for unit testing. The tests can be found in the unit_test folder an can be run with the following command:
+Finally, I used the [pyTest](http://doc.pytest.org/) library for unit testing. The tests can be found in the unit_test folder an can be run with the following command:
 ```bash
 py.test -v unit_test.py
 ```
@@ -79,6 +79,6 @@ The project consists of 3 files:
 The proxy itself is initialized by running the proxy.py module, as explained above.
 
 #### Bottom line
-Despite not having much time I quite enjoyed doing the assignment, it refreshed my memory on a few things I had forgotten and also I learned some new skills!
+Despite not having much time I enjoyed doing the assignment very much, it refreshed my memory on a few things I had forgotten and I also learned some new skills!
 
-I'm really excited on the possibility of working at C42, and even if this doesn't make the cut I'm happy to have learned new stuff and become a bit better at one of the things I'm passionate about.
+I'm really excited about the possibility of working at C42, and even if this doesn't make the cut I'm happy to have learned new stuff and become a bit better at one of the things I'm passionate about.
