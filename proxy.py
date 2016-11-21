@@ -10,7 +10,8 @@ First, the Proxy checks if the GET request has a valid format. If so, it proceed
 If the call to the API is successful, it will cache the response for further calls with the same EVENT_ID.
 If the call to the API fails, or has an unexpected response, it will inform the user of the occurred error.
 
-The Proxy can be initialized with the default authentication TOKEN provided or with a different one.
+The Proxy can be initialized with the default authentication TOKEN provided for the assignment
+or with a different one.
 """
 
 from http.server import HTTPServer, BaseHTTPRequestHandler
@@ -170,8 +171,6 @@ def get_user_parameters(params):
     return p, a
 
 if __name__ == "__main__":
-    # '-a' is the command for the authentication token
-    # '-p' is the command for the port number
 
     port_number, token = get_user_parameters(sys.argv)
     start_proxy(port_number=port_number, token=token)
