@@ -69,12 +69,14 @@ py.test -v unit_test.py
 ```
 
 #### Project structure
-The project consists of 3 files:
+The project consists of the following files:
 * [proxy.py](https://github.com/Pabce/calendar42-API-Proxy/blob/master/proxy.py) contains the Handler class, which manages all the requests passed on to the Proxy. When the Handler receives a request, it will check if it has the expected format, and return an error to the client if it does not. If it does, it will send the required GET requests through the GetRequest class in request_to_C42.py and return the requested data (or return the data directly from the cache). 
 
 * [request_to_C42.py](https://github.com/Pabce/calendar42-API-Proxy/blob/master/request_to_C42.py) contains the GetRequest class. Each instance of this class is used to send one or more GET requests to the C42 API, and filter and merge them into the requested format. This class can be modified and extended in the future to be able to send any kind of requests to the C42 API, and merge the response in any way we like.
 
 * [cache_manager.py](https://github.com/Pabce/calendar42-API-Proxy/blob/master/cache_manager.py) contains the CacheManager class. This class is the one in charge (as the name suggests) of managing the proxy cache. It stores the cached values for each distinct EVENT_ID that the client has requested, and also the time at when they were cached. It contains methods used by the Handler class to determine wheter the cached value should be returned to the client or rather a new request to the C42 API should be sent. 
+
+I also added an `__init__.py` module so the modules could be imported directly with their names.
 
 The proxy itself is initialized by running the proxy.py module, as explained above.
 
