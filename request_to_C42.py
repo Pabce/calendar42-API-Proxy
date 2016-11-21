@@ -3,10 +3,10 @@
 """
 File: request_to_C42.py
 
-A module for communicating with the C42 API.
+A module for talking to the C42 API.
 
 The GetRequest class can be used to send GET requests to the API.
-Other classes can be added in the future for increased functionality (PUT, HEAD, etc)
+Other classes can be added in the future for increased functionality (PUT, HEAD, etc).
 
 The get_events_with_subscriptions method does exactly what we want:
 send a couple of GET requests and filter and combine the results from them.

@@ -22,9 +22,10 @@ CACHE_TIME = 4.2 * 60  # that is 4.2 minutes, as requested
 
 
 class CacheManager:
-    def __init__(self):
+    def __init__(self, cache_time=CACHE_TIME):
         self.first_call_time = {}
         self.cache = {}
+        self.cache_time = cache_time
 
     # The following function checks if there is a stored cache value for the current EVENT_ID, returning True or False.
     def use_cache(self, EVENT_ID):
@@ -35,11 +36,11 @@ class CacheManager:
 
         time_since_last_call_to_C42 = call_time - self.first_call_time[EVENT_ID]
 
-        if EVENT_ID in self.cache and time_since_last_call_to_C42 < CACHE_TIME:
+        if EVENT_ID in self.cache and time_since_last_call_to_C42 < self.cache_time:
             print('Time since last call to the C42 API ({} seconds) for the event with EVENT_ID: {} '
                   'is smaller than the established cache time ({} seconds).\n'
                   'Therefore, requested response is directly from the Proxy cache.'
-                  .format(time_since_last_call_to_C42, EVENT_ID, CACHE_TIME))
+                  .format(time_since_last_call_to_C42, EVENT_ID, self.cache_time))
 
             return True
 

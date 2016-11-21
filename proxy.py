@@ -22,6 +22,9 @@ import request_to_C42
 
 __author__ = 'Pablo Barham'
 
+DEFAULT_PORT_NUMBER = 8080
+DEFAULT_TOKEN = '43ce3623f44c6bf9ff9a07622eb295ec0d7d2d0a'
+
 
 class Handler(BaseHTTPRequestHandler):
     # Handler for GET request:
@@ -109,28 +112,22 @@ class Handler(BaseHTTPRequestHandler):
         self.wfile.write(bytes(event_data, 'utf-8'))
 
 
-def manage_path(request_path):
-    split_path = request_path.split("/")
-    path_values = [value for value in split_path if value != '']
-
-    return path_values
-
-
-PORT_NUMBER = 8080
+PORT_NUMBER = 0
 TOKEN = ''
-proxy_address = ('', PORT_NUMBER)
-proxy_handler = Handler
 proxy_cache_manager = cache_manager.CacheManager()
 
 
-def start_proxy(token='43ce3623f44c6bf9ff9a07622eb295ec0d7d2d0a'):
-    # Set the authentication token:
-    global TOKEN
+def start_proxy(port_number=DEFAULT_PORT_NUMBER, token=DEFAULT_TOKEN):
+    # Set the authentication token and port number:
+    global TOKEN, PORT_NUMBER
     TOKEN = token
+    PORT_NUMBER = port_number
 
+    proxy_address = ('', PORT_NUMBER)
+    proxy_handler = Handler
     # Create a HTTP server and define the handler to manage incoming requests
     server = HTTPServer(proxy_address, proxy_handler)
-    print('Started Proxy server on port {}'.format(PORT_NUMBER))
+    print('Started Proxy server on port {} with Authentication Token: {}'.format(PORT_NUMBER, TOKEN))
 
     # Wait for incoming HTTP requests (forever)
     try:
@@ -140,8 +137,42 @@ def start_proxy(token='43ce3623f44c6bf9ff9a07622eb295ec0d7d2d0a'):
         server.socket.close()
 
 
+def manage_path(path):
+    split_path = path.split("/")
+    path_values = [value for value in split_path if value != '']
+
+    return path_values
+
+
+def get_user_parameters(params):
+    # '-a' is the command for the authentication token
+    # '-p' is the command for the port number
+    a = DEFAULT_TOKEN
+    p = DEFAULT_PORT_NUMBER
+
+    if len(params) > 1:
+        if '-a' in params:
+            pos = params.index('-a')
+            try:
+                a = params[pos + 1]
+            except IndexError:
+                print('Wrong command format, Authentication Token was set to default')
+
+        if '-p' in params:
+            pos = params.index('-p')
+            try:
+                p = int(params[pos + 1])
+            except IndexError:
+                print('Wrong command format, port number was set to default')
+            except ValueError:
+                print('Port number must be an integer! It was set to default')
+
+    return p, a
+
 if __name__ == "__main__":
-    if len(sys.argv) > 1:
-        start_proxy(sys.argv[1])
-    else:
-        start_proxy()
+    # '-a' is the command for the authentication token
+    # '-p' is the command for the port number
+
+    port_number, token = get_user_parameters(sys.argv)
+    start_proxy(port_number=port_number, token=token)
+
