@@ -14,7 +14,7 @@ These are set to default as:
 ```bash
 PORT_NUMBER = 8080 
 AUTHENTICATION_TOKEN = '43ce3623f44c6bf9ff9a07622eb295ec0d7d2d0a'
-# (That is, the TOKEN provided for the assignement)
+# (That is, the TOKEN provided for the assignment)
 ```
 
 Or in a Python script:
@@ -57,7 +57,7 @@ _First of all, I'm writing this when I'm not far from completing the assignment,
 Therefore, I thought it made no sense to write an inaccurate and prone to change 'guideline', and it would be much more efficient to write it all at once at the end._
 
 #### Library choices
-As I got into the assignement, I realized it was probably simple enough to be done with the standard python library, without need to use third party libraries such as [Django](https://www.djangoproject.com/).
+As I got into the assignment, I realized it was probably simple enough to be done with the standard python library, without need to use third party libraries such as [Django](https://www.djangoproject.com/).
 
 Therefore, mi initial choices for making requests to the C42 API and setting up the Proxy server where [urllib](https://docs.python.org/3/library/urllib.html) and [http.server](https://docs.python.org/3/library/http.server.html).
 
