@@ -63,6 +63,11 @@ Therefore, mi initial choices for making requests to the C42 API and setting up 
 
 Further into coding, however, I decided to switch to the [requests](http://docs.python-requests.org/en/master/) library, which I found to be a powerful and very efficient tool for sending HTTP requests.
 
+Finally, I used the [pyTest](http://doc.pytest.org/en/latest/example/) library for unit testing. The tests can be found in the unit_test folder an can be run with the following command:
+```bash
+py.test -v unit_test.py
+```
+
 #### Project structure
 The project consists of 3 files:
 * [proxy.py](https://github.com/Pabce/calendar42-API-Proxy/blob/master/proxy.py) contains the Handler class, which manages all the requests passed on to the Proxy. When the Handler receives a request, it will check if it has the expected format, and return an error to the client if it does not. If it does, it will send the required GET requests through the GetRequest class in request_to_C42.py and return the requested data (or return the data directly from the cache). 
